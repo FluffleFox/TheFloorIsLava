@@ -1,0 +1,157 @@
+fileFormatVersion: 2
+guid: 134e1d6d413f7594f81ee5ddc66db696
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: lava_displace
+    100004: Plane
+    100006: Plane.001
+    100008: Plane.002
+    100010: Plane.003
+    400000: //RootNode
+    400002: lava_displace
+    400004: Plane
+    400006: Plane.001
+    400008: Plane.002
+    400010: Plane.003
+    2100000: Material.003
+    2300000: Plane
+    2300002: Plane.001
+    2300004: Plane.002
+    2300006: Plane.003
+    3300000: Plane
+    3300002: Plane.001
+    3300004: Plane.002
+    3300006: Plane.003
+    4300000: Plane.003
+    4300002: Plane.002
+    4300004: Plane.001
+    4300006: Plane
+    7400000: lava_displace|dust_displace.001Action
+    7400002: lava_displace|dust_displace.002Action
+    7400004: lava_displace|lava_displaceAction.005
+    7400006: lava_displace|Plane.002Action
+    7400008: lava_displace|shieldAction
+    7400010: lava_displace|Sphere.010Action.001
+    7400012: lava_displace|Torus.001Action
+    7400014: lava_displace|Torus.002Action
+    7400016: Plane.003|dust_displace.001Action
+    7400018: Plane.003|dust_displace.002Action
+    7400020: Plane.003|lava_displaceAction.005
+    7400022: Plane.003|Plane.002Action
+    7400024: Plane.003|shieldAction
+    7400026: Plane.003|Sphere.010Action.001
+    7400028: Plane.003|Torus.001Action
+    7400030: Plane.003|Torus.002Action
+    7400032: Plane.002|dust_displace.001Action
+    7400034: Plane.002|dust_displace.002Action
+    7400036: Plane.002|lava_displaceAction.005
+    7400038: Plane.002|Plane.002Action
+    7400040: Plane.002|shieldAction
+    7400042: Plane.002|Sphere.010Action.001
+    7400044: Plane.002|Torus.001Action
+    7400046: Plane.002|Torus.002Action
+    7400048: Plane.001|dust_displace.001Action
+    7400050: Plane.001|dust_displace.002Action
+    7400052: Plane.001|lava_displaceAction.005
+    7400054: Plane.001|Plane.002Action
+    7400056: Plane.001|shieldAction
+    7400058: Plane.001|Sphere.010Action.001
+    7400060: Plane.001|Torus.001Action
+    7400062: Plane.001|Torus.002Action
+    7400064: Plane|dust_displace.001Action
+    7400066: Plane|dust_displace.002Action
+    7400068: Plane|lava_displaceAction.005
+    7400070: Plane|Plane.002Action
+    7400072: Plane|shieldAction
+    7400074: Plane|Sphere.010Action.001
+    7400076: Plane|Torus.001Action
+    7400078: Plane|Torus.002Action
+    9500000: //RootNode
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 0.01
+    hasPreviousCalculatedGlobalScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
