@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 4854754978791716922}
   - component: {fileID: 4854754978791716921}
   - component: {fileID: 4854754978791716924}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Player 1
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -138,13 +138,21 @@ MonoBehaviour:
   - s
   - w
   - z
+  - x
   MovementSpeed: 10
-  DashSpeed: 2
+  DashSpeed: 30
   DashDruation: 0.5
   JumpForce: 15
-  SlowDown: 120
+  Acceleration: 60
+  SlowDown: 60
   Ground: 0
   GravityScale: 30
+  Mask:
+    serializedVersion: 2
+    m_Bits: 1024
+  CharacterMask:
+    serializedVersion: 2
+    m_Bits: 2048
 --- !u!95 &4854754978791716924
 Animator:
   serializedVersion: 3
@@ -174,7 +182,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4860281831498286522}
   - component: {fileID: 4860281831498286523}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Line
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -301,7 +309,7 @@ GameObject:
   - component: {fileID: 3662521910834934235}
   - component: {fileID: 7016157212845433306}
   - component: {fileID: 8840080830280157258}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}

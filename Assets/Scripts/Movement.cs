@@ -10,6 +10,8 @@ public class Movement : MonoBehaviour
     /// 2 Left
     /// 3 Down
     /// 4 Up
+    /// 5 Jump
+    /// 6 Block
     /// </summary>
 
     bool[] Taped = new bool[4];
@@ -22,7 +24,7 @@ public class Movement : MonoBehaviour
     public float DashDruation = 1.0f;
     public float JumpForce = 20.0f;
 
-    //Vector3 Translation;
+    public float Acceleration = 1;
     float dx;
     float dy;
     float dz;
@@ -32,7 +34,11 @@ public class Movement : MonoBehaviour
     public bool Ground = false;
     public float GravityScale = 10;
     public LayerMask Mask;
-   // Animator Anim;
+    public LayerMask CharacterMask;
+    // Animator Anim;
+
+    GameObject Target;
+    bool Block;
 
     private void Start()
     {
@@ -58,33 +64,59 @@ public class Movement : MonoBehaviour
     {
         if (Input.GetKey(Arrows[0]))
         {
-            // Translation += new Vector3(0, 0, 1+Dashes[0]) * MovementSpeed;
-            dz = (1 + Dashes[0]) * MovementSpeed;
+            if (dz < MovementSpeed)
+            {
+               dz += Acceleration * Time.deltaTime;
+            }
+            else
+            {
+                dz = MovementSpeed;
+            }
+            dz += Dashes[0];
         }
         else if (Input.GetKey(Arrows[1]))
         {
-            //Translation += new Vector3(0, 0, -1 - Dashes[1]) * MovementSpeed;
-            dz = (-1 - Dashes[1]) * MovementSpeed;
+            if (dz > -MovementSpeed)
+            {
+                dz -= Acceleration * Time.deltaTime;
+            }
+            else
+            {
+                dz = -MovementSpeed;
+            }
+            dz -= Dashes[1];
         }
         else
         {
-            if (Mathf.Abs(dz) > 1f)
+            if (Mathf.Abs(dz) > 1.0f)
             { dz -= Mathf.Sign(dz) * SlowDown * Time.deltaTime; }
             else { dz = 0; }
         }
 
-
         if (Input.GetKey(Arrows[2]))
         {
-            // Translation += new Vector3(-1 - Dashes[2], 0, 0) * MovementSpeed;
-            dx = (-1 - Dashes[2]) * MovementSpeed;
+            if (dx > -MovementSpeed)
+            {
+                dx -= Acceleration * Time.deltaTime;
+            }
+            else
+            {
+                dx = -MovementSpeed;
+            }
+            dx -= Dashes[2];
         }
         else if (Input.GetKey(Arrows[3]))
         {
-            //Translation += new Vector3(1 + Dashes[3], 0, 0) * MovementSpeed;
-            dx = (1 + Dashes[3]) * MovementSpeed;
+            if (dx < MovementSpeed)
+            {
+                dx += Acceleration * Time.deltaTime;
+            }
+            else
+            {
+                dx = MovementSpeed;
+            }
+            dx += Dashes[3];
         }
-        //else { dx = 0; }
         else
         {
             if (Mathf.Abs(dx) > 1f)
@@ -92,9 +124,10 @@ public class Movement : MonoBehaviour
             else { dx = 0; }
         }
 
+
+        //skakanie
         if (Ground)
         {
-            //RB.AddForce(new Vector3(0.0f, 1.0f, 0.0f)*JumpForce, ForceMode.Impulse);
             dy = 0;
             if(Input.GetKey(Arrows[4]))
             {
@@ -104,11 +137,13 @@ public class Movement : MonoBehaviour
         }
         else { dy -= GravityScale * Time.deltaTime; }
 
+
+        //Dashe
+        Dash = 0;
         for (int i=0; i<4; i++)
         {
             if (Input.GetKeyDown(Arrows[i]))
             {
-                Dash = 0;
                 if (Taped[i])
                 {
                     Dashes[i] = DashSpeed;
@@ -120,21 +155,32 @@ public class Movement : MonoBehaviour
                     Taped[i] = true;
                     Times[i] = 0.3f;
                 }
-                if (Dashes[i] >= Dash) { Dash = Dashes[i]; }
             }
+            if (Dashes[i] > Dash) { Dash = Dashes[i]; }
             //Anim.SetFloat("Dash", Dash);
             Times[i] -= Time.deltaTime;
             if(Times[i]<0.0f) { Taped[i] = false; }
-            if(Dashes[i]>=0.0f) { Dashes[i] -= (Time.deltaTime*DashSpeed*(1.0f/DashDruation)); }
+            if(Dashes[i]>0.0f) { Dashes[i] -= (Time.deltaTime*DashSpeed*(1.0f/DashDruation)); }
             else { Dashes[i] = 0.0f; }
         }
 
-        
+        //Poruszanie się
+        if (Block) { RB.velocity = new Vector3(dx, dy, dz)*0.1f; }
+        else { RB.velocity = new Vector3(dx, dy, dz); }
 
-        //transform.Translate(Translation * Time.deltaTime, Space.World);
-        //RB.AddForce(Translation, ForceMode.Force);
+        if (SlowDown < 60) { SlowDown += SlowDown * Time.deltaTime; } 
+        else { SlowDown = 60; }
 
-        RB.velocity = new Vector3(dx,dy,dz);
+
+        //Walka
+        RaycastHit Info;
+        if (Physics.SphereCast(transform.position + new Vector3(0.0f, 0.85f, 0.0f), 0.85f, new Vector3(dx, dy, dz), out Info, 1.0f, CharacterMask))
+        {
+            Target = Info.collider.gameObject;
+        }
+
+        if (Input.GetKey(Arrows[5])) { Block = true; }
+        else { Block = false; }
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -149,6 +195,13 @@ public class Movement : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+        else if (collision.collider.tag == "Player")
+        {
+            if (collision.collider.gameObject == Target)
+            {
+                collision.collider.gameObject.SendMessage("Hit", new Vector3(dx, dy, dz) * (1+Dash/DashSpeed));
+            }
+        }
     }
     private void OnCollisionExit(Collision collision)
     {
@@ -156,6 +209,22 @@ public class Movement : MonoBehaviour
         {
             Ground = false;
             transform.parent = collision.transform.parent;
+        }
+    }
+
+    private void Hit(Vector3 attack)
+    {
+        Debug.Log("Hit");
+        if (Block)
+        {
+            dx += attack.x*0.1f;
+            dz += attack.z*0.1f;
+        }
+        else
+        {
+            dx += attack.x;
+            dz += attack.z;
+            SlowDown *= 0.85f;
         }
     }
 }
